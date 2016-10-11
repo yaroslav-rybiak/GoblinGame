@@ -1,7 +1,7 @@
 public class Door {
 
-    public void open() {
-
+    public static void open() {
+        System.out.println("The door is opened!");
     }
 
 }

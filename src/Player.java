@@ -4,6 +4,10 @@ import java.io.InputStreamReader;
 
 public class Player {
 
+    public static void die() {
+        System.out.println("You are dead.");
+    }
+
     public static String askName() throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         System.out.println("Please tell me your name");
@@ -18,6 +22,28 @@ public class Player {
     public void getInfo() {
         System.out.println(String.format("Your name is %s, your level is %d. You have %d health and %d strength.",
                 this.name, this.level, this.health, this.strength));
+    }
+
+    public void askWhatNext() throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String userAction;
+        do {
+            System.out.println("You see a door, what would you do? (open or exit)");
+            userAction = br.readLine();
+        }
+        while (!userAction.equals("open") && !userAction.equals("exit") &&
+                !userAction.equals("o") && !userAction.equals("e"));
+        switch(userAction) {
+            case ("open") : case ("o") : {
+                Door.open();
+                break;
+            }
+            case ("exit") :case ("e") : {
+                Player.die();
+                System.exit(0);
+                break;
+            }
+        }
     }
 
     public int getStrength() {
