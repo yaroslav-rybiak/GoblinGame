@@ -6,7 +6,7 @@ public class Door {
         int choice = Helper.getRandomNumber(0, 1);
         switch (choice) {
             case(0) : {
-                Room.emptyRoom(player);
+                Room.meetRoom(player);
                 Player.askWhatNext(player);
                 break;
             }

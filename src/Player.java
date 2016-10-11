@@ -19,10 +19,12 @@ public class Player {
     private int level;
     private int health;
     private int strength;
+    private int gold;
 
     public void getInfo() {
-        System.out.println(String.format("Your name is %s, your level is %d. You have %d health and %d strength.",
-                this.name, this.level, this.health, this.strength));
+        System.out.println(String.format("Your name is %s, your level is %d. You have %d health and %d strength. " +
+                        "There are %d gold in your pockets.",
+                this.name, this.level, this.health, this.strength, this.gold));
     }
 
     public String getName() {
@@ -72,6 +74,7 @@ public class Player {
         this.strength = 2;
         this.health = 10;
         this.level = 1;
+        this.gold = 0;
     }
 
     void levelUp() {
@@ -81,5 +84,12 @@ public class Player {
 
     void loseHealth() {
         this.health--;
+    }
+
+    void receiveGold() {
+        int[] amounts ={10, 20, 30, 40, 50};
+        int amount =  amounts[Helper.getRandomNumber(0, amounts.length - 1)];
+        this. gold += amount;
+        System.out.println(String.format("You've got %d gold.", amount));
     }
 }
