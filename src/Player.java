@@ -37,7 +37,7 @@ public class Player {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String userAction;
         do {
-            System.out.println("You see a door, what would you do? (open, info or exit)");
+            System.out.println("You see a door, what are you going to do? (open, info or exit)");
             userAction = br.readLine();
         }
         while (!userAction.equals("open") && !userAction.equals("o") &&
@@ -72,5 +72,14 @@ public class Player {
         this.strength = 2;
         this.health = 10;
         this.level = 1;
+    }
+
+    void levelUp() {
+        this.level++;
+        this.strength++;
+    }
+
+    void loseHealth() {
+        this.health--;
     }
 }
