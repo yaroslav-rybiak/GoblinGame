@@ -4,8 +4,9 @@ import java.io.InputStreamReader;
 
 public class Player {
 
-    public static void die() {
-        System.out.println("You are dead.");
+    public static void die(Player player) {
+        System.out.println(String.format("Here lies %s, who had reached level %d before meeting an inglorious death.",
+                player.getName(), player.getLevel()));
     }
 
     public static String askName() throws IOException {
@@ -24,22 +25,36 @@ public class Player {
                 this.name, this.level, this.health, this.strength));
     }
 
-    public static void askWhatNext() throws IOException {
+    public String getName() {
+        return this.name;
+    }
+
+    public int getLevel() {
+        return this.level;
+    }
+
+    public static void askWhatNext(Player player) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String userAction;
         do {
-            System.out.println("You see a door, what would you do? (open or exit)");
+            System.out.println("You see a door, what would you do? (open, info or exit)");
             userAction = br.readLine();
         }
-        while (!userAction.equals("open") && !userAction.equals("exit") &&
-                !userAction.equals("o") && !userAction.equals("e"));
+        while (!userAction.equals("open") && !userAction.equals("o") &&
+               !userAction.equals("exit") && !userAction.equals("e") &&
+               !userAction.equals("info") && !userAction.equals("i"));
         switch(userAction) {
+            case ("info") :case ("i") : {
+                player.getInfo();
+                Player.askWhatNext(player);
+                break;
+            }
             case ("open") : case ("o") : {
-                Door.open();
+                Door.open(player);
                 break;
             }
             case ("exit") :case ("e") : {
-                Player.die();
+                Player.die(player);
                 System.exit(0);
                 break;
             }
@@ -58,5 +73,4 @@ public class Player {
         this.health = 10;
         this.level = 1;
     }
-
 }

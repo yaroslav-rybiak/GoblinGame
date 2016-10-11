@@ -15,8 +15,22 @@ public class Monster {
         this.name = names[Helper.getRandomNumber(0, names.length - 1)];
     }
 
-    public static void meetMonster() {
-        System.out.println("You've met a monster!");
+    public String getType() {
+        return this.type;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public int getStrength() {
+        return this.strength;
+    }
+
+    public static void meetMonster(Player player) {
+        Monster monster = new Monster(player);
+        System.out.println(String.format("You've met a %s %s, he has %d strength.",
+                monster.getType(), monster.getName(), monster.getStrength()));
     }
 
 }
