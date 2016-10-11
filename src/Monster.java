@@ -15,4 +15,8 @@ public class Monster {
         this.name = names[Helper.getRandomNumber(0, names.length - 1)];
     }
 
+    public static void meetMonster() {
+        System.out.println("You've met a monster!");
+    }
+
 }

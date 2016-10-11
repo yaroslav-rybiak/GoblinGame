@@ -24,7 +24,7 @@ public class Player {
                 this.name, this.level, this.health, this.strength));
     }
 
-    public void askWhatNext() throws IOException {
+    public static void askWhatNext() throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String userAction;
         do {

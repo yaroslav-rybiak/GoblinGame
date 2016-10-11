@@ -6,7 +6,7 @@ public class Main {
 
         Player player = new Player(Player.askName());
         player.getInfo();
-        player.askWhatNext();
+        Player.askWhatNext();
     }
 
 }
