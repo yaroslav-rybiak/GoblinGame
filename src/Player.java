@@ -7,6 +7,13 @@ public class Player {
     public static void die(Player player) {
         System.out.println(String.format("Here lies %s, who had reached level %d before meeting an inglorious death.",
                 player.getName(), player.getLevel()));
+        if (player.getGold() == 0) {
+            System.out.println("You haven't managed to collect any gold.");
+        }
+        else {
+            System.out.println(String.format("You've managed to collect %d gold, but you can't take money to the grave.",
+                    player.getGold()));
+        }
     }
 
     public static String askName() throws IOException {
@@ -21,10 +28,20 @@ public class Player {
     private int strength;
     private int gold;
 
-    public void getInfo() {
-        System.out.println(String.format("Your name is %s, your level is %d. You have %d health and %d strength. " +
-                        "There are %d gold in your pockets.",
-                this.name, this.level, this.health, this.strength, this.gold));
+    public void getFullInfo() {
+        System.out.println(String.format("Your name is %s, your level is %d.\nYou have %d health and %d strength.",
+                this.getName(), this.getLevel(), this.getHealth(), this.getStrength()));
+        if (this.getGold() == 0) {
+            System.out.println("There are no gold in your pockets.");
+        }
+        else {
+            System.out.println(String.format("There are %d gold in your pockets.", this.getGold()));
+        }
+    }
+
+    public void getShortInfo() {
+        System.out.println(String.format("You have %d health and %d strength.",
+                this.health, this.strength));
     }
 
     public String getName() {
@@ -35,19 +52,32 @@ public class Player {
         return this.level;
     }
 
+    public int getHealth() {
+        return this.health;
+    }
+
+    public int getStrength() {
+        return this.strength;
+    }
+
+    public int getGold() {
+        return this.gold;
+    }
+
     public static void askWhatNext(Player player) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String userAction;
+        //player.getFullInfo();
         do {
-            System.out.println("You see a door, what are you going to do? (open, info or exit)");
+            System.out.println("You see a door, what are you going to do? (open, info or suicide)");
             userAction = br.readLine();
         }
         while (!userAction.equals("open") && !userAction.equals("o") &&
-               !userAction.equals("exit") && !userAction.equals("e") &&
-               !userAction.equals("info") && !userAction.equals("i"));
+                !userAction.equals("suicide") && !userAction.equals("s") &&
+                !userAction.equals("info") && !userAction.equals("i"));
         switch(userAction) {
             case ("info") :case ("i") : {
-                player.getInfo();
+                player.getFullInfo();
                 Player.askWhatNext(player);
                 break;
             }
@@ -55,16 +85,12 @@ public class Player {
                 Door.open(player);
                 break;
             }
-            case ("exit") :case ("e") : {
+            case ("suicide") :case ("s") : {
                 Player.die(player);
                 System.exit(0);
                 break;
             }
         }
-    }
-
-    public int getStrength() {
-        return this.strength;
     }
 
     //constructor

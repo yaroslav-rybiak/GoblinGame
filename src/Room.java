@@ -31,19 +31,20 @@ public class Room {
     }
 
     public static void emptyRoom(Player player) throws IOException {
-        System.out.println("The room is empty.");
+        System.out.println("You entered an empty room.");
         Player.askWhatNext(player);
     }
 
     public static void treasuryRoom(Player player) throws IOException {
-        System.out.println("You entered a treasure. You've become a little reacher.");
+        System.out.println("You found a treasury and became a little reacher.");
         player.receiveGold();
         Player.askWhatNext(player);
     }
 
     public static void trapRoom(Player player) throws IOException {
-        System.out.println("This is a trap! You've lost some health.");
+        System.out.println("It's a trap! You've lost some health.");
         player.loseHealth();
+        player.getShortInfo();
         Player.askWhatNext(player);
     }
 }

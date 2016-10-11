@@ -37,35 +37,38 @@ public class Monster {
         Monster monster = new Monster(player);
         System.out.println(String.format("You've met a %s %s, he has %d strength.",
                 monster.getType(), monster.getName(), monster.getStrength()));
+        player.getShortInfo();
         do {
             System.out.println("What are you going to you do? (fight or run)");
             userAction = br.readLine().toLowerCase();
         }
         while (!userAction.equals("fight") && !userAction.equals("f") &&
-               !userAction.equals("run") && !userAction.equals("r"));
+                !userAction.equals("run") && !userAction.equals("r"));
 
         switch(userAction) {
             case ("fight") : case ("f") : {
                 if (player.getStrength() >= monster.getStrength()) {
-                    System.out.println("You won.\n");
+                    System.out.println("You won.");
                     player.levelUp();
                 }
                 else {
                     System.out.println("You fought the monster, but he was stronger. You've lost some health.\n");
                     player.loseHealth();
+                    player.getShortInfo();
                 }
                 break;
             }
             case ("run") : case ("r") : {
-                System.out.println("Let's roll 24 sided dice.");
+                System.out.println("Let's roll a 24 sided dice.");
                 int diceResult = Helper.getRandomNumber(1, 24);
                 System.out.println(String.format("Your result is %d.", diceResult));
                 if (diceResult <= 12) {
-                    System.out.println("You tried to escape, but failed and lost some health.\n");
+                    System.out.println("You tried to escape, but failed and lost some health.");
                     player.loseHealth();
+                    player.getShortInfo();
                 }
                 else {
-                    System.out.println("You've successfully ran from monster.\n");
+                    System.out.println("You've successfully ran from monster.");
                 }
                 break;
             }
