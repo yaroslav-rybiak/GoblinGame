@@ -6,7 +6,6 @@ public class Main {
 
         Player player = new Player(Player.askName());
         player.greetings();
-        player.askWhatNext();
     }
 
 }

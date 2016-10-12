@@ -7,6 +7,12 @@ class Player {
     void die() {
         System.out.println(String.format("Here lies %s, who had reached level %d before meeting an inglorious death.",
                 this.getName(), this.getLevel()));
+        if (this.getDoors() != 1) {
+            System.out.println(String.format("You went through %d doors.", this.getDoors()));
+        }
+        else {
+            System.out.println("You went through 1 door.");
+        }
         if (this.getGold() == 0) {
             System.out.println("You haven't managed to collect any gold.");
         }
@@ -58,11 +64,20 @@ class Player {
         }
     }
 
+    private int doors;
     private String name;
     private int level;
     private int health;
     private int strength;
     private int gold;
+
+    void incrementDoor() {
+        this.doors++;
+    }
+
+    public int getDoors() {
+        return this.doors;
+    }
 
     private void getFullInfo() {
         System.out.println(String.format("Your name is %s, your level is %d. You have %d health and %d strength.",
@@ -105,7 +120,7 @@ class Player {
         String userAction;
         Door door = new Door();
         do {
-            System.out.println("You see a door, what are you going to do? (open, info or suicide)");
+            System.out.println("You see the next door, what are you going to do? (open, info or suicide)");
             userAction = br.readLine();
         }
         while (!userAction.equals("open") && !userAction.equals("o") &&
