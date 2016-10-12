@@ -4,15 +4,15 @@ import java.io.InputStreamReader;
 
 public class Player {
 
-    public static void die(Player player) {
+    public void die() {
         System.out.println(String.format("Here lies %s, who had reached level %d before meeting an inglorious death.",
-                player.getName(), player.getLevel()));
-        if (player.getGold() == 0) {
+                this.getName(), this.getLevel()));
+        if (this.getGold() == 0) {
             System.out.println("You haven't managed to collect any gold.");
         }
         else {
             System.out.println(String.format("You've managed to collect %d gold, but you can't take money to the grave.",
-                    player.getGold()));
+                    this.getGold()));
         }
         System.exit(0);
     }
@@ -87,7 +87,7 @@ public class Player {
                 break;
             }
             case ("suicide") :case ("s") : {
-                Player.die(player);
+                player.die();
                 System.exit(0);
                 break;
             }
@@ -107,6 +107,8 @@ public class Player {
     void levelUp() {
         this.level++;
         this.strength++;
+        this.health++;
+        System.out.println("You feel much stronger now.");
     }
 
     void loseHealth(int hit) {

@@ -37,6 +37,9 @@ public class Monster {
     public int getHealth() {
         return this.health;
     }
+    public void setHealth(int health) {
+        this.health = health;
+    }
 
     public static void meetMonster(Player player) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -56,17 +59,6 @@ public class Monster {
             case ("fight") : case ("f") : {
                 Fighting fighting = new Fighting();
                 fighting.start(player, monster);
-                /*
-                if (player.getStrength() >= monster.getStrength()) {
-                    System.out.println("You won.");
-                    player.levelUp();
-                }
-                else {
-                    System.out.println("You fought the monster, but he was stronger. You've lost some health.\n");
-                    player.loseHealth();
-                    player.getShortInfo();
-                }
-                */
                 break;
             }
             case ("run") : case ("r") : {
@@ -74,9 +66,14 @@ public class Monster {
                 int diceResult = Helper.getRandomNumber(1, 24);
                 System.out.println(String.format("Your result is %d.", diceResult));
                 if (diceResult <= 12) {
-                    System.out.println("You tried to escape, but failed and lost some health.");
+                    System.out.println("You escaped but lost some health while running away like a chicken.");
                     player.loseHealth(1);
-                    player.getShortInfo();
+                    if (player.getHealth() > 0) {
+                        player.getShortInfo();
+                    }
+                    else {
+                        player.die();
+                    }
                 }
                 else {
                     System.out.println("You've successfully ran from the monster.");
@@ -86,8 +83,11 @@ public class Monster {
         }
     }
 
-    void loseHealth(int hit) {
+    public void loseHealth(int hit) {
         this.health -= hit;
     }
 
+    public void die() {
+        this.setHealth(0);
+    }
 }

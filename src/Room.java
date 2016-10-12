@@ -46,7 +46,7 @@ public class Room {
         player.loseHealth(1);
         //add death check
         if (player.getHealth() < 0) {
-            Player.die(player);
+            player.die();
         }
         else {
             player.getShortInfo();
