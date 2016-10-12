@@ -19,8 +19,43 @@ class Player {
 
     static String askName() throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        System.out.println("Please tell me your name.");
+        System.out.println("You found yourself in a dungeon. " +
+                "You can't remember how you got here. " +
+                "You can hardly remember your own name. What's your name?");
         return br.readLine();
+    }
+
+    void greetings() throws IOException {
+        System.out.println(String.format("Okay, %s. You are in an empty room with the only door that leads you to the " +
+                "lower level of dungeon.\nWhat's there? I don't know. How can one escape? Try to find it out. " +
+                "To open the door, type \"open\" or \"o\". To see your stats, type \"info\" or \"i\""
+                , this.getName()));
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String userAction;
+        Door door = new Door();
+        do {
+            System.out.println("What are you going to do? (open, info or suicide)");
+            userAction = br.readLine();
+        }
+        while (!userAction.equals("open") && !userAction.equals("o") &&
+                !userAction.equals("suicide") && !userAction.equals("s") &&
+                !userAction.equals("info") && !userAction.equals("i"));
+        switch(userAction) {
+            case ("info") :case ("i") : {
+                this.getFullInfo();
+                this.askWhatNext();
+                break;
+            }
+            case ("open") : case ("o") : {
+                door.open(this);
+                break;
+            }
+            case ("suicide") :case ("s") : {
+                this.die();
+                System.exit(0);
+                break;
+            }
+        }
     }
 
     private String name;
@@ -30,7 +65,7 @@ class Player {
     private int gold;
 
     private void getFullInfo() {
-        System.out.println(String.format("Your name is %s, your level is %d.\nYou have %d health and %d strength.",
+        System.out.println(String.format("Your name is %s, your level is %d. You have %d health and %d strength.",
                 this.getName(), this.getLevel(), this.getHealth(), this.getStrength()));
         if (this.getGold() == 0) {
             System.out.println("There is no gold in your pockets.");

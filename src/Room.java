@@ -38,7 +38,7 @@ class Room {
     }
 
     private static void emptyRoom(Player player) throws IOException {
-        System.out.println("You entered an empty room.");
+        System.out.println("You've entered an empty room.");
         player.askWhatNext();
     }
 
@@ -49,7 +49,7 @@ class Room {
     }
 
     private static void fountainRoom(Player player) throws IOException {
-        System.out.println("You found a fountain of health. You feel better now");
+        System.out.println("You've found a fountain of health. You feel a little better now.");
         player.gainHealth(5);
         player.askWhatNext();
     }
