@@ -5,6 +5,7 @@ import java.io.InputStreamReader;
 public class Monster {
 
     private int strength;
+    private int health;
     private String type;
     private String name;
 
@@ -17,6 +18,9 @@ public class Monster {
         this.strength = Helper.getRandomNumber(player.getStrength()-1, player.getStrength()+1);
         this.type = types[Helper.getRandomNumber(0, types.length - 1)];
         this.name = names[Helper.getRandomNumber(0, names.length - 1)];
+        int[] healths ={(player.getStrength()-2)*5, (player.getStrength()-1)*4, (player.getStrength())*3};
+        this.health = healths[Helper.getRandomNumber(0, healths.length - 1)];
+
     }
 
     public String getType() {
@@ -30,13 +34,16 @@ public class Monster {
     public int getStrength() {
         return this.strength;
     }
+    public int getHealth() {
+        return this.health;
+    }
 
     public static void meetMonster(Player player) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String userAction;
         Monster monster = new Monster(player);
-        System.out.println(String.format("You've met a %s %s, he has %d strength.",
-                monster.getType(), monster.getName(), monster.getStrength()));
+        System.out.println(String.format("You've met a %s %s, it has %d health and %d strength.",
+                monster.getType(), monster.getName(), monster.getHealth(), monster.getStrength()));
         player.getShortInfo();
         do {
             System.out.println("What are you going to you do? (fight or run)");
@@ -47,6 +54,9 @@ public class Monster {
 
         switch(userAction) {
             case ("fight") : case ("f") : {
+                Fighting fighting = new Fighting();
+                fighting.start(player, monster);
+                /*
                 if (player.getStrength() >= monster.getStrength()) {
                     System.out.println("You won.");
                     player.levelUp();
@@ -56,6 +66,7 @@ public class Monster {
                     player.loseHealth();
                     player.getShortInfo();
                 }
+                */
                 break;
             }
             case ("run") : case ("r") : {
@@ -64,14 +75,19 @@ public class Monster {
                 System.out.println(String.format("Your result is %d.", diceResult));
                 if (diceResult <= 12) {
                     System.out.println("You tried to escape, but failed and lost some health.");
-                    player.loseHealth();
+                    player.loseHealth(1);
                     player.getShortInfo();
                 }
                 else {
-                    System.out.println("You've successfully ran from monster.");
+                    System.out.println("You've successfully ran from the monster.");
                 }
                 break;
             }
         }
     }
+
+    void loseHealth(int hit) {
+        this.health -= hit;
+    }
+
 }

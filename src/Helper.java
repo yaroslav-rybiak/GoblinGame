@@ -8,4 +8,8 @@ public class Helper {
         return rand.nextInt((max - min) + 1) + min;
     }
 
+    static String makeFirstLetterCapital (String s) {
+        return s.substring(0,1).toUpperCase() + s.substring(1);
+    }
+
 }

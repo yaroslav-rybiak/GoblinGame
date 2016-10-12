@@ -14,6 +14,7 @@ public class Player {
             System.out.println(String.format("You've managed to collect %d gold, but you can't take money to the grave.",
                     player.getGold()));
         }
+        System.exit(0);
     }
 
     public static String askName() throws IOException {
@@ -32,7 +33,7 @@ public class Player {
         System.out.println(String.format("Your name is %s, your level is %d.\nYou have %d health and %d strength.",
                 this.getName(), this.getLevel(), this.getHealth(), this.getStrength()));
         if (this.getGold() == 0) {
-            System.out.println("There are no gold in your pockets.");
+            System.out.println("There is no gold in your pockets.");
         }
         else {
             System.out.println(String.format("There are %d gold in your pockets.", this.getGold()));
@@ -97,7 +98,7 @@ public class Player {
     Player (String name)
     {
         this.name = name;
-        this.strength = 2;
+        this.strength = 3;
         this.health = 10;
         this.level = 1;
         this.gold = 0;
@@ -108,8 +109,8 @@ public class Player {
         this.strength++;
     }
 
-    void loseHealth() {
-        this.health--;
+    void loseHealth(int hit) {
+        this.health -= hit;
     }
 
     void receiveGold() {
