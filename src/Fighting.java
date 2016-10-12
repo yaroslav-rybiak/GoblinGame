@@ -9,16 +9,22 @@ public class Fighting {
     public void start(Player player, Monster monster) throws IOException {
         System.out.println(String.format("The fight between %s and %s %s has started!",
                 player.getName(), monster.getType(), monster.getName()));
-        do {
+        while (monster.getHealth() > 0 && player.getHealth() > 0 && !run) {
             int playerDamage = damage(player);
-            System.out.println(String.format("You hit a %s and made %d damage.",
+            System.out.println(String.format("You hit the %s and made %d damage.",
                     monster.getName(), playerDamage));
             monster.loseHealth(playerDamage);
             if (monster.getHealth() > 0) {
                 int monsterDamage = damage(monster);
-                System.out.println(String.format("%s hit you and made %d damage.",
-                        Helper.makeFirstLetterCapital(monster.getName()), monsterDamage));
+                System.out.println(String.format("The %s hit you and made %d damage.",
+                        monster.getName(), monsterDamage));
                 player.loseHealth(monsterDamage);
+                if (player.getHealth() <= 0) {
+                    player.die();
+                }
+            }
+            else {
+                break;
             }
             System.out.println(String.format("You have %s health, %s has %s health.",
                     player.getHealth(), monster.getName(), monster.getHealth()));
@@ -51,7 +57,6 @@ public class Fighting {
                 }
             }
         }
-        while (monster.getHealth() > 0 && player.getHealth() > 0 && !run);
 
         if (run) {
             System.out.println("You ran away.");
@@ -66,7 +71,7 @@ public class Fighting {
             System.out.println("Both died.");
         }
         else if (monster.getHealth() > 0 && player.getHealth() <= 0) {
-            System.out.println(String.format("%s killed you.", Helper.makeFirstLetterCapital(monster.getName())));
+            System.out.println(String.format("The %s killed you.", monster.getName()));
             player.die();
         }
         player.getShortInfo();

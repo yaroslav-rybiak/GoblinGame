@@ -125,4 +125,8 @@ public class Player {
         this. gold += amount;
         System.out.println(String.format("You've got %d gold.", amount));
     }
+
+    public boolean isDead() {
+        return this.getHealth() <= 0;
+    }
 }

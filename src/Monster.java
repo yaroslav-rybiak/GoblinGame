@@ -90,4 +90,8 @@ public class Monster {
     public void die() {
         this.setHealth(0);
     }
+
+    public boolean isDead() {
+        return this.getHealth() <= 0;
+    }
 }
