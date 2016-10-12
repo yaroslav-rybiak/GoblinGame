@@ -43,8 +43,14 @@ public class Room {
 
     public static void trapRoom(Player player) throws IOException {
         System.out.println("It's a trap! You've lost some health.");
-        player.loseHealth();
-        player.getShortInfo();
-        Player.askWhatNext(player);
+        player.loseHealth(1);
+        //add death check
+        if (player.getHealth() < 0) {
+            Player.die(player);
+        }
+        else {
+            player.getShortInfo();
+            Player.askWhatNext(player);
+        }
     }
 }
