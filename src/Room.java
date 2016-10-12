@@ -4,7 +4,7 @@ public class Room {
 
     private String type;
 
-    private String[] types ={"empty", "treasury", "trap"};
+    private String[] types ={"empty", "treasury", "trap", "fountain"};
 
     //constructor
     Room ()
@@ -27,18 +27,28 @@ public class Room {
                 Room.trapRoom(player);
                 break;
             }
+            case("fountain") : {
+                Room.fountainRoom(player);
+                break;
+            }
         }
     }
 
     public static void emptyRoom(Player player) throws IOException {
         System.out.println("You entered an empty room.");
-        Player.askWhatNext(player);
+        player.askWhatNext();
     }
 
     public static void treasuryRoom(Player player) throws IOException {
         System.out.println("You found a treasury and became a little reacher.");
         player.receiveGold();
-        Player.askWhatNext(player);
+        player.askWhatNext();
+    }
+
+    public static void fountainRoom(Player player) throws IOException {
+        System.out.println("You found a fountain of health. You feel better now");
+        player.gainHealth(5);
+        player.askWhatNext();
     }
 
     public static void trapRoom(Player player) throws IOException {
@@ -50,7 +60,7 @@ public class Room {
         }
         else {
             player.getShortInfo();
-            Player.askWhatNext(player);
+            player.askWhatNext();
         }
     }
 }

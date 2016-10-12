@@ -65,10 +65,10 @@ public class Player {
         return this.gold;
     }
 
-    public static void askWhatNext(Player player) throws IOException {
+    public void askWhatNext() throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String userAction;
-        //player.getFullInfo();
+        Door door = new Door();
         do {
             System.out.println("You see a door, what are you going to do? (open, info or suicide)");
             userAction = br.readLine();
@@ -78,16 +78,16 @@ public class Player {
                 !userAction.equals("info") && !userAction.equals("i"));
         switch(userAction) {
             case ("info") :case ("i") : {
-                player.getFullInfo();
-                Player.askWhatNext(player);
+                this.getFullInfo();
+                this.askWhatNext();
                 break;
             }
             case ("open") : case ("o") : {
-                Door.open(player);
+                door.open(this);
                 break;
             }
             case ("suicide") :case ("s") : {
-                player.die();
+                this.die();
                 System.exit(0);
                 break;
             }
@@ -113,6 +113,10 @@ public class Player {
 
     void loseHealth(int hit) {
         this.health -= hit;
+    }
+
+    void gainHealth(int heal) {
+        this.health += heal;
     }
 
     void receiveGold() {
