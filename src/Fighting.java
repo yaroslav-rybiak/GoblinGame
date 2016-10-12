@@ -26,7 +26,7 @@ public class Fighting {
             else {
                 break;
             }
-            System.out.println(String.format("You have %s health, %s has %s health.",
+            System.out.println(String.format("You have %s health, the %s has %s health.",
                     player.getHealth(), monster.getName(), monster.getHealth()));
             BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
             String userAction;
