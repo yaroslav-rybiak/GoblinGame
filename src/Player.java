@@ -2,9 +2,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class Player {
+class Player {
 
-    public void die() {
+    void die() {
         System.out.println(String.format("Here lies %s, who had reached level %d before meeting an inglorious death.",
                 this.getName(), this.getLevel()));
         if (this.getGold() == 0) {
@@ -17,9 +17,9 @@ public class Player {
         System.exit(0);
     }
 
-    public static String askName() throws IOException {
+    static String askName() throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        System.out.println("Please tell me your name");
+        System.out.println("Please tell me your name.");
         return br.readLine();
     }
 
@@ -29,7 +29,7 @@ public class Player {
     private int strength;
     private int gold;
 
-    public void getFullInfo() {
+    private void getFullInfo() {
         System.out.println(String.format("Your name is %s, your level is %d.\nYou have %d health and %d strength.",
                 this.getName(), this.getLevel(), this.getHealth(), this.getStrength()));
         if (this.getGold() == 0) {
@@ -40,32 +40,32 @@ public class Player {
         }
     }
 
-    public void getShortInfo() {
+    void getShortInfo() {
         System.out.println(String.format("You have %d health and %d strength.",
                 this.health, this.strength));
     }
 
-    public String getName() {
+    String getName() {
         return this.name;
     }
 
-    public int getLevel() {
+    private int getLevel() {
         return this.level;
     }
 
-    public int getHealth() {
+    int getHealth() {
         return this.health;
     }
 
-    public int getStrength() {
+    int getStrength() {
         return this.strength;
     }
 
-    public int getGold() {
+    private int getGold() {
         return this.gold;
     }
 
-    public void askWhatNext() throws IOException {
+    void askWhatNext() throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String userAction;
         Door door = new Door();
@@ -124,9 +124,5 @@ public class Player {
         int amount =  amounts[Helper.getRandomNumber(0, amounts.length - 1)];
         this. gold += amount;
         System.out.println(String.format("You've got %d gold.", amount));
-    }
-
-    public boolean isDead() {
-        return this.getHealth() <= 0;
     }
 }

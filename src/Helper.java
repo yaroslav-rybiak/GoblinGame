@@ -1,6 +1,6 @@
 import java.util.Random;
 
-public class Helper {
+class Helper {
 
     static int getRandomNumber(int min, int max)
     {

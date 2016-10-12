@@ -2,19 +2,18 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class Monster {
+class Monster {
 
     private int strength;
     private int health;
     private String type;
     private String name;
 
-    private String[] names ={"goblin", "demon", "mandrake", "dragon", "troll", "morlock", "golem", "kraken", "harpy"};
-    private String[] types ={"water", "fire", "metal", "ghost", "grass", "thermal", "sea", "lake", "greasy", "hairy"};
-
     //constructor
-    Monster (Player player)
+    private Monster (Player player)
     {
+        String[] names ={"goblin", "demon", "mandrake", "dragon", "troll", "morlock", "golem", "kraken", "harpy"};
+        String[] types ={"water", "fire", "metal", "ghost", "grass", "thermal", "sea", "lake", "greasy", "hairy"};
         this.strength = Helper.getRandomNumber(player.getStrength()-1, player.getStrength()+1);
         this.type = types[Helper.getRandomNumber(0, types.length - 1)];
         this.name = names[Helper.getRandomNumber(0, names.length - 1)];
@@ -23,25 +22,25 @@ public class Monster {
 
     }
 
-    public String getType() {
+    String getType() {
         return this.type;
     }
 
-    public String getName() {
+    String getName() {
         return this.name;
     }
 
-    public int getStrength() {
+    int getStrength() {
         return this.strength;
     }
-    public int getHealth() {
+    int getHealth() {
         return this.health;
     }
-    public void setHealth(int health) {
+    private void setHealth(int health) {
         this.health = health;
     }
 
-    public static void meetMonster(Player player) throws IOException {
+    static void meetMonster(Player player) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String userAction;
         Monster monster = new Monster(player);
@@ -83,15 +82,11 @@ public class Monster {
         }
     }
 
-    public void loseHealth(int hit) {
+    void loseHealth(int hit) {
         this.health -= hit;
     }
 
-    public void die() {
+    void die() {
         this.setHealth(0);
-    }
-
-    public boolean isDead() {
-        return this.getHealth() <= 0;
     }
 }

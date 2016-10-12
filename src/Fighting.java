@@ -2,11 +2,11 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class Fighting {
+class Fighting {
 
     private boolean run = false;
 
-    public void start(Player player, Monster monster) throws IOException {
+    void start(Player player, Monster monster) throws IOException {
         System.out.println(String.format("The fight between %s and %s %s has started!",
                 player.getName(), monster.getType(), monster.getName()));
         while (monster.getHealth() > 0 && player.getHealth() > 0 && !run) {
