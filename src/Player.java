@@ -13,7 +13,7 @@ class Player {
             System.out.println("You have nothing in your backpack.");
         }
         else {
-            System.out.println("idk");
+            System.out.println("There is something in your backpack.");
         }
     }
 
