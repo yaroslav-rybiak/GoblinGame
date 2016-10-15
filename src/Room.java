@@ -7,7 +7,7 @@ class Room {
     //constructor
     private Room ()
     {
-        String[] types ={"empty", "treasury", "trap", "fountain", "library"};
+        String[] types ={"empty", "treasury", "trap", "fountain", "library", "cellar"};
         this.type = types[Helper.getRandomNumber(0, types.length - 1)];
     }
 
@@ -34,7 +34,17 @@ class Room {
                 Room.libraryRoom(player);
                 break;
             }
+            case("cellar") : {
+                Room.potionRoom(player);
+                break;
+            }
         }
+    }
+
+    private static void potionRoom(Player player) throws IOException {
+        System.out.println("You've found someone's wine cellar. You've stolen a healing potion.");
+        player.addItemToBackpack("potion");
+        player.askWhatNext();
     }
 
     private static void emptyRoom(Player player) throws IOException {

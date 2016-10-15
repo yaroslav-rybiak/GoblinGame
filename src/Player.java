@@ -1,8 +1,25 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.List;
+import java.util.ArrayList;
 
 class Player {
+    private List<String> backpack = new ArrayList<>();
+
+    private void getBackpack() {
+
+        if (this.backpack.isEmpty()) {
+            System.out.println("You have nothing in your backpack.");
+        }
+        else {
+            System.out.println("idk");
+        }
+    }
+
+    public void addItemToBackpack(String item) {
+        this.backpack.add(item);
+    }
 
     void die() {
         System.out.println(String.format("Here lies %s, who had reached level %d before meeting an inglorious death.",
@@ -25,43 +42,17 @@ class Player {
 
     static String askName() throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        System.out.println("You found yourself in a dungeon. " +
-                "You can't remember how you got here. " +
-                "You can hardly remember your own name. What's your name?");
+        System.out.println("You found yourself in a dungeon. You can't remember how you got here.");
+        System.out.println("You can hardly remember your own name. What's your name?");
         return br.readLine();
     }
 
     void greetings() throws IOException {
-        System.out.println(String.format("Okay, %s. You are in an empty room with the only door that leads you to the " +
-                "lower level of dungeon.\nWhat's there? I don't know. How can one escape? Try to find it out. " +
-                "To open the door, type \"open\" or \"o\". To see your stats, type \"info\" or \"i\""
-                , this.getName()));
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        String userAction;
-        Door door = new Door();
-        do {
-            System.out.println("What are you going to do? (open, info or suicide)");
-            userAction = br.readLine();
-        }
-        while (!userAction.equals("open") && !userAction.equals("o") &&
-                !userAction.equals("suicide") && !userAction.equals("s") &&
-                !userAction.equals("info") && !userAction.equals("i"));
-        switch(userAction) {
-            case ("info") :case ("i") : {
-                this.getFullInfo();
-                this.askWhatNext();
-                break;
-            }
-            case ("open") : case ("o") : {
-                door.open(this);
-                break;
-            }
-            case ("suicide") :case ("s") : {
-                this.die();
-                System.exit(0);
-                break;
-            }
-        }
+        System.out.println(String.format("You think that your name is probably %s.", this.getName()));
+        System.out.println("You came here through the door that disappeared behind your back.");
+        System.out.println("Now you see the only door that leads to the lower level of the dungeon.");
+        System.out.println("What's there? You don't know. Do you have a chance to escape? Try to find it out.");
+        this.askWhatNext();
     }
 
     private int doors;
@@ -75,7 +66,7 @@ class Player {
         this.doors++;
     }
 
-    public int getDoors() {
+    private int getDoors() {
         return this.doors;
     }
 
@@ -120,23 +111,30 @@ class Player {
         String userAction;
         Door door = new Door();
         do {
-            System.out.println("You see the next door, what are you going to do? (open, info or suicide)");
+            System.out.println("You see the next door, what are you going to do? (open, info, backpack or quit)");
             userAction = br.readLine();
         }
         while (!userAction.equals("open") && !userAction.equals("o") &&
-                !userAction.equals("suicide") && !userAction.equals("s") &&
-                !userAction.equals("info") && !userAction.equals("i"));
+                !userAction.equals("info") && !userAction.equals("i") &&
+                !userAction.equals("backpack") && !userAction.equals("b") &&
+                !userAction.equals("quit") && !userAction.equals("q"));
+
         switch(userAction) {
+            case ("open") : case ("o") : {
+                door.open(this);
+                break;
+            }
             case ("info") :case ("i") : {
                 this.getFullInfo();
                 this.askWhatNext();
                 break;
             }
-            case ("open") : case ("o") : {
-                door.open(this);
+            case ("backpack") :case ("b") : {
+                this.getBackpack();
+                this.askWhatNext();
                 break;
             }
-            case ("suicide") :case ("s") : {
+            case ("quit") :case ("q") : {
                 this.die();
                 System.exit(0);
                 break;
