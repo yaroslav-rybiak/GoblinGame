@@ -58,7 +58,7 @@ class Room {
     }
 
     private static void treasuryRoom(Player player) throws IOException {
-        System.out.println("You found a treasury and became a little reacher.");
+        System.out.println("You found a treasury and became a little richer.");
         player.receiveGold();
         player.askWhatNext();
     }
@@ -70,7 +70,7 @@ class Room {
     }
 
     private static void libraryRoom(Player player) throws IOException {
-        System.out.println("You found a library and gained the experience that you never had in real life.");
+        System.out.println("You found a library and gained an experience that you had never had in real life.");
         player.levelUp();
     }
 

@@ -76,7 +76,7 @@ class Monster {
                     }
                 }
                 else {
-                    System.out.println("You've successfully ran from the monster.");
+                    System.out.println("You've successfully run from the monster.");
                 }
                 break;
             }

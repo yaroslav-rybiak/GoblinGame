@@ -19,7 +19,7 @@ class Player {
             System.out.println("Your backpack is empty.");
         }
         else {
-            System.out.print("There is ");
+            System.out.print("There is a ");
             System.out.print(this.backpack.get(0));
             System.out.print(" in your backpack. ");
             System.out.print("What are you going to do? ");

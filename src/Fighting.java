@@ -63,7 +63,7 @@ class Fighting {
         }
 
         else if (monster.getHealth() <= 0 && player.getHealth() > 0) {
-            System.out.println(String.format("You killed the %s.", monster.getName()));
+            System.out.println(String.format("You've killed the %s.", monster.getName()));
             player.levelUp();
         }
 
