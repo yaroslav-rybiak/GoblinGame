@@ -12,12 +12,12 @@ class Monster {
     //constructor
     private Monster (Player player)
     {
-        String[] names ={"goblin", "demon", "mandrake", "dragon", "troll", "morlock", "golem", "kraken", "harpy"};
-        String[] types ={"water", "fire", "metal", "ghost", "grass", "thermal", "sea", "lake", "greasy", "hairy"};
+        String[] names = {"goblin", "demon", "mandrake", "dragon", "troll", "morlock", "golem", "kraken", "harpy"};
+        String[] types = {"water", "fire", "metal", "ghost", "grass", "thermal", "sea", "lake", "greasy", "hairy"};
         this.strength = Helper.getRandomNumber(player.getStrength()-1, player.getStrength()+1);
         this.type = types[Helper.getRandomNumber(0, types.length - 1)];
         this.name = names[Helper.getRandomNumber(0, names.length - 1)];
-        int[] healths ={(player.getStrength()-2)*5, (player.getStrength()-1)*4, (player.getStrength())*3};
+        int[] healths = {(player.getStrength()-2)*5, (player.getStrength()-1)*4, (player.getStrength())*3};
         this.health = healths[Helper.getRandomNumber(0, healths.length - 1)];
 
     }
