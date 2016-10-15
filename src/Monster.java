@@ -47,8 +47,9 @@ class Monster {
         System.out.println(String.format("You've met a %s %s, it has %d health and %d strength.",
                 monster.getType(), monster.getName(), monster.getHealth(), monster.getStrength()));
         player.getShortInfo();
+        System.out.print("What are you going to you do? ");
         do {
-            System.out.println("What are you going to you do? (fight or run)");
+            System.out.println("(fight or run)");
             userAction = br.readLine().toLowerCase();
         }
         while (!userAction.equals("fight") && !userAction.equals("f") &&
