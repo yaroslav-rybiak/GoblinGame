@@ -8,4 +8,8 @@ class Helper {
         return rand.nextInt((max - min) + 1) + min;
     }
 
+    static void printLine() {
+        System.out.println("====================");
+    }
+
 }

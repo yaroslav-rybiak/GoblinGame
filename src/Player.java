@@ -5,25 +5,60 @@ import java.util.List;
 import java.util.ArrayList;
 
 class Player {
+    private BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+    String getBackpack() {
+        return backpack.get(0);
+    }
+
     private List<String> backpack = new ArrayList<>();
 
-    private void getBackpack() {
-
-        if (this.backpack.isEmpty()) {
-            System.out.println("You have nothing in your backpack.");
+    private void checkBackpack() throws IOException {
+        String userAction;
+        if (this.backpack.get(0).equals("nothing")) {
+            System.out.println("Your backpack is empty.");
         }
         else {
-            System.out.println("There is something in your backpack.");
+            System.out.print("There is ");
+            System.out.print(this.backpack.get(0));
+            System.out.print(" in your backpack. ");
+            System.out.print("What are you going to do? ");
+            do {
+                System.out.println("(drink or cancel)");
+                userAction = br.readLine();
+            }
+            while (!userAction.equals("drink") && !userAction.equals("d") &&
+                    !userAction.equals("cancel") && !userAction.equals("c"));
+
+            switch (userAction) {
+                case ("drink"):
+                case ("d"): {
+                    this.backpack.remove(0);
+                    this.backpack.add("nothing");
+                    this.gainHealth(10);
+                    System.out.println("You feel much better now.");
+                    this.askWhatNext();
+                    break;
+                }
+                case ("cancel"):
+                case ("c"): {
+                    this.askWhatNext();
+                    break;
+                }
+            }
         }
     }
 
-    public void addItemToBackpack(String item) {
+    void addItemToBackpack(String item) {
+        this.backpack.remove(0);
         this.backpack.add(item);
     }
 
     void die() {
+        Helper.printLine();
         System.out.println(String.format("Here lies %s, who had reached level %d before meeting an inglorious death.",
                 this.getName(), this.getLevel()));
+        Helper.printLine();
         if (this.getDoors() != 1) {
             System.out.println(String.format("You went through %d doors.", this.getDoors()));
         }
@@ -42,12 +77,19 @@ class Player {
 
     static String askName() throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String name;
+
         System.out.println("You found yourself in a dungeon. You can't remember how you got here.");
-        System.out.println("You can hardly remember your own name. What's your name?");
-        return br.readLine();
+        System.out.print("You can hardly remember your own name. ");
+        do {
+            System.out.println("What's your name?");
+            name = br.readLine();
+        }
+        while (name.equals(""));
+        return name;
     }
 
-    void greetings() throws IOException {
+    void startGame() throws IOException {
         System.out.println(String.format("You think that your name is probably %s.", this.getName()));
         System.out.println("You came here through the door that disappeared behind your back.");
         System.out.println("Now you see the only door that leads to the lower level of the dungeon.");
@@ -107,11 +149,12 @@ class Player {
     }
 
     void askWhatNext() throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String userAction;
         Door door = new Door();
+
+        System.out.print("You see the next door, what are you going to do? ");
         do {
-            System.out.println("You see the next door, what are you going to do? (open, info, backpack or quit)");
+            System.out.println("(open, info, backpack or quit)");
             userAction = br.readLine();
         }
         while (!userAction.equals("open") && !userAction.equals("o") &&
@@ -130,7 +173,7 @@ class Player {
                 break;
             }
             case ("backpack") :case ("b") : {
-                this.getBackpack();
+                this.checkBackpack();
                 this.askWhatNext();
                 break;
             }
@@ -150,6 +193,7 @@ class Player {
         this.health = 10;
         this.level = 1;
         this.gold = 0;
+        this.backpack.add("nothing");
     }
 
     void levelUp() {

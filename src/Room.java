@@ -42,8 +42,13 @@ class Room {
     }
 
     private static void potionRoom(Player player) throws IOException {
-        System.out.println("You've found someone's wine cellar. You've stolen a healing potion.");
-        player.addItemToBackpack("potion");
+        if (player.getBackpack().equals("nothing")) {
+            System.out.println("You found someone's wine cellar and stole a healing potion.");
+            player.addItemToBackpack("healing potion");
+        }
+        else {
+            System.out.println("You've found someone's empty wine cellar.");
+        }
         player.askWhatNext();
     }
 
