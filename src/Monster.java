@@ -44,8 +44,8 @@ class Monster {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String userAction;
         Monster monster = new Monster(player);
-        System.out.println(String.format("You've met a %s %s, it has %d health and %d strength.",
-                monster.getType(), monster.getName(), monster.getHealth(), monster.getStrength()));
+        System.out.format("You've met a %s %s, it has %d health and %d strength.\n",
+                monster.getType(), monster.getName(), monster.getHealth(), monster.getStrength());
         player.getShortInfo();
         System.out.print("What are you going to you do? ");
         do {
@@ -64,7 +64,7 @@ class Monster {
             case ("run") : case ("r") : {
                 System.out.println("Let's roll a 24 sided dice.");
                 int diceResult = Helper.getRandomNumber(1, 24);
-                System.out.println(String.format("Your result is %d.", diceResult));
+                System.out.format("Your result is %d.\n", diceResult);
                 if (diceResult <= 12) {
                     System.out.println("You escaped but lost some health while running away like a chicken.");
                     player.loseHealth(1);

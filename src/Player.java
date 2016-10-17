@@ -56,11 +56,11 @@ class Player {
 
     void die() {
         Helper.printLine();
-        System.out.println(String.format("Here lies %s, who had reached level %d before meeting an inglorious death.",
-                this.getName(), this.getLevel()));
+        System.out.format("Here lies %s, who had reached level %d before meeting an inglorious death.\n",
+                this.getName(), this.getLevel());
         Helper.printLine();
         if (this.getDoors() != 1) {
-            System.out.println(String.format("You went through %d doors.", this.getDoors()));
+            System.out.format("You went through %d doors.\n", this.getDoors());
         }
         else {
             System.out.println("You went through 1 door.");
@@ -69,8 +69,8 @@ class Player {
             System.out.println("You haven't managed to collect any gold.");
         }
         else {
-            System.out.println(String.format("You've managed to collect %d gold, but you can't take money to the grave.",
-                    this.getGold()));
+            System.out.format("You've managed to collect %d gold, but you can't take money to the grave.\n",
+                    this.getGold());
         }
         System.exit(0);
     }
@@ -90,7 +90,7 @@ class Player {
     }
 
     void startGame() throws IOException {
-        System.out.println(String.format("You think that your name is probably %s.", this.getName()));
+        System.out.format("You think that your name is probably %s.\n", this.getName());
         System.out.println("You came here through the door that disappeared behind your back.");
         System.out.println("Now you see the only door that leads to the lower level of the dungeon.");
         System.out.println("What's there? You don't know. Do you have a chance to escape? Try to find it out.");
@@ -113,19 +113,19 @@ class Player {
     }
 
     private void getFullInfo() {
-        System.out.println(String.format("Your name is %s, your level is %d. You have %d health and %d strength.",
-                this.getName(), this.getLevel(), this.getHealth(), this.getStrength()));
+        System.out.format("Your name is %s, your level is %d. You have %d health and %d strength.\n",
+                this.getName(), this.getLevel(), this.getHealth(), this.getStrength());
         if (this.getGold() == 0) {
             System.out.println("There is no gold in your pockets.");
         }
         else {
-            System.out.println(String.format("There are %d gold in your pockets.", this.getGold()));
+            System.out.format("There are %d gold in your pockets.\n", this.getGold());
         }
     }
 
     void getShortInfo() {
-        System.out.println(String.format("You have %d health and %d strength.",
-                this.health, this.strength));
+        System.out.format("You have %d health and %d strength.\n",
+                this.health, this.strength);
     }
 
     String getName() {
@@ -215,6 +215,6 @@ class Player {
         int[] amounts ={10, 20, 30, 40, 50};
         int amount =  amounts[Helper.getRandomNumber(0, amounts.length - 1)];
         this. gold += amount;
-        System.out.println(String.format("You've got %d gold.", amount));
+        System.out.format("You've got %d gold.\n", amount);
     }
 }

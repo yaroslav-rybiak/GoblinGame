@@ -7,17 +7,17 @@ class Fighting {
     private boolean run = false;
 
     void start(Player player, Monster monster) throws IOException {
-        System.out.println(String.format("The fight between %s and %s %s has started!",
-                player.getName(), monster.getType(), monster.getName()));
+        System.out.format("The fight between %s and %s %s has started!\n",
+                player.getName(), monster.getType(), monster.getName());
         while (monster.getHealth() > 0 && player.getHealth() > 0 && !run) {
             int playerDamage = damage(player);
-            System.out.println(String.format("You hit the %s and made %d damage.",
-                    monster.getName(), playerDamage));
+            System.out.format("You hit the %s and made %d damage.\n",
+                    monster.getName(), playerDamage);
             monster.loseHealth(playerDamage);
             if (monster.getHealth() > 0) {
                 int monsterDamage = damage(monster);
-                System.out.println(String.format("The %s hit you and made %d damage.",
-                        monster.getName(), monsterDamage));
+                System.out.format("The %s hit you and made %d damage.\n",
+                        monster.getName(), monsterDamage);
                 player.loseHealth(monsterDamage);
                 if (player.getHealth() <= 0) {
                     player.die();
@@ -26,8 +26,8 @@ class Fighting {
             else {
                 break;
             }
-            System.out.println(String.format("You have %s health, the %s has %s health.",
-                    player.getHealth(), monster.getName(), monster.getHealth()));
+            System.out.format("You have %s health, the %s has %s health.\n",
+                    player.getHealth(), monster.getName(), monster.getHealth());
             BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
             String userAction;
             do {
@@ -41,7 +41,7 @@ class Fighting {
                     run = true;
                     System.out.println("Let's roll a 24 sided dice.");
                     int diceResult = Helper.getRandomNumber(1, 24);
-                    System.out.println(String.format("Your result is %d.", diceResult));
+                    System.out.format("Your result is %d.\n", diceResult);
                     if (diceResult <= 12) {
                         System.out.println("You escaped but lost some health while running away like a chicken.");
                         player.loseHealth(2);
@@ -63,7 +63,7 @@ class Fighting {
         }
 
         else if (monster.getHealth() <= 0 && player.getHealth() > 0) {
-            System.out.println(String.format("You've killed the %s.", monster.getName()));
+            System.out.format("You've killed the %s.\n", monster.getName());
             player.levelUp();
         }
 
@@ -71,7 +71,7 @@ class Fighting {
             System.out.println("Both died.");
         }
         else if (monster.getHealth() > 0 && player.getHealth() <= 0) {
-            System.out.println(String.format("The %s killed you.", monster.getName()));
+            System.out.format("The %s killed you.\n", monster.getName());
             player.die();
         }
         player.getShortInfo();
